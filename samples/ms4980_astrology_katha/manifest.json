@@ -1,0 +1,69 @@
+{
+  "manuscript_id": 4980,
+  "source_identifier": "4988",
+  "title": "ไม่ปรากฏ (โหราศาสตร์และคาถา)",
+  "script": "tham_lanna",
+  "genre": "astrology",
+  "pages": [
+    {
+      "file": "p0001.jpg",
+      "page_no": 1,
+      "sequence": 0,
+      "sha256": "6b0961de9438f90b481bd79080aba602018d08a9ed148f9d425f4c04cad5f52e"
+    },
+    {
+      "file": "p0002.jpg",
+      "page_no": 2,
+      "sequence": 1,
+      "sha256": "1d9c18efc87c26ad6224bdb8b219bf6c445a20ce4d337d1cf385b1dd88c354ee"
+    },
+    {
+      "file": "p0003.jpg",
+      "page_no": 3,
+      "sequence": 2,
+      "sha256": "80c03c7464f5b30fc40eeaa0502a47b79fbd872e6f9486c542768745e9c05a64"
+    },
+    {
+      "file": "p0004.jpg",
+      "page_no": 4,
+      "sequence": 3,
+      "sha256": "9a5d02eda6cd90d2032cabb9958eac561e50687a86643a30cdedbfaeb28e3fe6"
+    },
+    {
+      "file": "p0005.jpg",
+      "page_no": 5,
+      "sequence": 4,
+      "sha256": "35d0cd8a6f6538a9da7002515fd2892e5f67446b896fd17c990b982d83dd0995"
+    },
+    {
+      "file": "p0006.jpg",
+      "page_no": 6,
+      "sequence": 5,
+      "sha256": "a267ca452111c2f3c8b3217fe9de4c8f406bcca4df4d22a320c3b77d5ca3cc49"
+    },
+    {
+      "file": "p0007.jpg",
+      "page_no": 7,
+      "sequence": 6,
+      "sha256": "0cfbe97ee9dcdd15301be2535672d89ab2ced36bba607d6fa564947ea51c3cf4"
+    },
+    {
+      "file": "p0008.jpg",
+      "page_no": 8,
+      "sequence": 7,
+      "sha256": "e332cc1b816b881d7b3d33f2d80a456690399b8daafbc09b8de65da0d6e84658"
+    },
+    {
+      "file": "p0009.jpg",
+      "page_no": 9,
+      "sequence": 8,
+      "sha256": "66d36c0bb0a1a52afcd8522bf1b946a947e1342f206ac3fd7b57e17129d9929e"
+    },
+    {
+      "file": "p0010.jpg",
+      "page_no": 10,
+      "sequence": 9,
+      "sha256": "a99bfaf9f60c5995cf9b1132a6f3c68099a7eea2ab2d679e53996f3e8fe103eb"
+    }
+  ]
+}

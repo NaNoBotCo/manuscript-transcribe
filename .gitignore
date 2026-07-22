@@ -1,0 +1,26 @@
+# generated/derived — regenerable, never in git
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+dist/
+build/
+.DS_Store
+
+# local secrets — the crawler loads .env.local with `set -a`
+.env
+.env.*
+*secret*
+*token*.txt
+*credential*
+
+# databases and crawled media: large, derived, and third-party
+*.db
+*.sqlite
+*.sqlite3
+*.bundle
+*.log
+store/
+crawler/store/
+cache/

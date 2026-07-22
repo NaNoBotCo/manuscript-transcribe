@@ -1,0 +1,233 @@
+# scripts.yaml — registry of script profiles for the transcription pipeline.
+#
+# CORE PRINCIPLE: scripts are config, not code. Everything transcribe.py knows
+# about a script lives here. To add a script, add an entry below — no code changes.
+#
+# Fields per entry:
+#   id             machine id (referenced by --force-script and in output JSON)
+#   names          human names / aliases the model may recognise
+#   unicode_block  "Block name U+XXXX" if encoded, or "none — romanize" if not
+#   regions        where the script is/was used
+#   traditions     text genres it typically carries
+#   prompt_notes   free-text guidance injected into the transcription prompt
+#   romanization   system to use when unencoded, or as a parallel output
+#
+# Unencoded / partially encoded scripts should output romanization + a short
+# IPA-ish or Pali/Sanskrit gloss instead of (or alongside) Unicode.
+
+scripts:
+
+  - id: khom
+    names: [Khom, Khmer Mul, Aksar Mul, Khom Thai, ขอม]
+    unicode_block: "Khmer U+1780"
+    regions: [Central Thailand, Cambodia]
+    traditions: [yantra, tamra, Pali liturgical, sak-yant]
+    prompt_notes: |
+      Khmer-derived sacred script used across Central Thailand for Pali/Sanskrit
+      liturgy, tamra (treatises), and yantra (yant). Written in Mul ("round,
+      thick") letterforms — rounded, weighty, more angular than Thai.
+      - STACKING: heavy vertical stacking of subscript consonants (Khmer coeng).
+        A single syllable cluster may stack 2–3 consonants below the base. Read
+        the base first, then subscripts top-to-bottom. Do NOT silently unstack —
+        preserve the cluster.
+      - Pali/Sanskrit orthography is expected even inside Thai texts: geminate
+        consonants, retroflex ṭ/ḍ/ṇ/ḷ, conjunct ligatures, niggahita (ṃ).
+      - CONFUSION PAIRS: Khom vs Thai print — Thai letters carry a loop-head
+        (hua); Khom has no loop and is rounder/Mul. Watch Khom pa/ba, ta/tha,
+        ya/sa which share silhouettes; disambiguate by subscript and vowel.
+      - YANTRA CONTEXT: letters often isolated as bīja (seed) syllables in grid
+        cells or radiating lines — e.g. นะโมพุทธายะ (na mo phut tha ya), or
+        อิติปิโส. Cells may be rotated/mirrored; FLAG orientation rather than
+        normalising. Do not invent letters to "complete" a khatha.
+      - NUMERALS: Khmer or Thai numerals, frequent in magic-square (yantra) grids.
+      - Never normalise an archaic or ligated form to a modern print glyph — mark
+        it uncertain with the candidate reading instead.
+    romanization: "IAST / Pali-Sanskrit transliteration"
+
+  - id: tai_tham
+    names: [Tai Tham, Lanna, Tua Mueang, Tua Tham, ตัวเมือง, อักษรธรรมล้านนา]
+    unicode_block: "Tai Tham U+1A20"
+    regions: [Northern Thailand, Lan Na]
+    traditions: [Pali liturgical, tamra, astrology/horā, folk manuscripts]
+    prompt_notes: |
+      Northern Thai (Lan Na) script, also the vehicle for Pali in the north.
+      Rounded letterforms with prominent subscript/stacked consonants (Tham
+      family stacks BELOW the base line).
+      - TWO REGISTERS: "tham" letters carry Pali/religious text; secular Kam
+        Mueang (Northern Thai) uses the same core alphabet with extra vowels and
+        a few language-specific letters.
+      - Distinctive tall/looped consonants and stacked medial -r-/-l-. Vowel
+        signs attach above, below, before, and after; a vowel may wrap the
+        cluster — keep it with its consonant.
+      - CONFUSION: nearly identical to the other Tham-family scripts (Tai Lue,
+        Tai Khuen, Lao Tham/Isan Tham). Do NOT distinguish by letter shape alone
+        — lean on language, orthographic habits, and provenance. If unsure which
+        Tham variant, say so and give the shared reading.
+      - NUMERALS: Tham (hora) digits U+1A80–U+1A89 and Tai Tham Hora digits.
+      - Preserve tone marks and the mai kang / sakot markers; do not modernise.
+    romanization: "Pali IAST for religious text; RTGS-style for Kam Mueang"
+
+  - id: tham_lao
+    names: [Lao Tham, Tua Tham Lao, Tham Lao, ພາສາທັມ, อักษรธรรมลาว]
+    unicode_block: "Tai Tham U+1A20 (partial — romanize where unencoded)"
+    regions: [Laos, Lao Buddhist temples]
+    traditions: [Pali liturgical, jataka, folk-religious palm-leaf]
+    prompt_notes: |
+      The Buddhist Tham script of Laos — a Tham-family variant very close to Lan
+      Na, used for Pali and religious vernacular on palm-leaf. NOT the modern Lao
+      secular alphabet and NOT Lao Buhan (the old secular hand).
+      - Stacked subscripts as in all Tham scripts; Pali orthography for liturgy.
+      - CONFUSION: essentially the same letterforms as Isan Tham (tham_isan) —
+        separate them by provenance (Laos vs NE Thailand), not shape. Also close
+        to Lan Na (tai_tham); differ in a few vowel/letter variants.
+      - Some Lao-Tham-specific glyphs are unencoded in the Tai Tham block —
+        where you cannot render Unicode, give romanization + gloss and flag it.
+    romanization: "Pali IAST for religious text; Lao romanization for vernacular"
+
+  - id: tham_isan
+    names: [Isan Tham, Tua Tham Isan, Tham Isan, อักษรธรรมอีสาน]
+    unicode_block: "Tai Tham U+1A20 (partial — romanize where unencoded)"
+    regions: [Northeastern Thailand, Isan]
+    traditions: [Pali liturgical, ansisan/folk tales, herbal & magical tamra]
+    prompt_notes: |
+      Northeastern Thai (Isan) Tham — the Tham-family script of the Lao-speaking
+      northeast, used for Buddhist/Pali palm-leaf and folk-magical texts. For all
+      practical purposes the same letter inventory as Lao Tham.
+      - Stacked subscripts; Pali orthography for liturgy; vernacular Isan/Lao for
+        tales and remedies.
+      - CONFUSION: indistinguishable from tham_lao by shape — decide by
+        provenance and content. Close to tai_tham (Lan Na) too.
+      - Herbal/magical tamra mix Tham prose with Khom bīja and yantra grids on
+        the same leaf — identify per region, not per page.
+    romanization: "Pali IAST for religious text; Lao/Isan romanization otherwise"
+
+  - id: lao_buhan
+    names: [Lao Buhan, Old Lao, Tua Lao Buhan, ອັກສອນລາວບູຮານ]
+    unicode_block: "none — romanize"
+    regions: [Laos, Lan Xang]
+    traditions: [secular tales, poetry, chronicles, some religious vernacular]
+    prompt_notes: |
+      The old Lao secular-religious hand, direct ancestor of the modern Lao
+      alphabet. LARGELY UNENCODED — output romanization + a short gloss; do NOT
+      map glyphs onto modern Lao Unicode, because the shapes, ligatures, and
+      orthography diverge.
+      - "Worldly" script: fewer heavy stacks than Tham, more cursive/linear. Used
+        for tales, poetry, and chronicles rather than Pali liturgy.
+      - Features modern Lao dropped: superscript/subscript vowel ligatures,
+        ligated consonant clusters, archaic spellings, and letters later merged.
+      - CONFUSION: distinguish from Tham (Buhan has far less vertical stacking)
+        and from MODERN Lao (Buhan letterforms are older/rounder, spelling is
+        etymological not phonetic). If it looks like clean modern Lao, it is
+        probably not Buhan.
+      - Flag archaic spellings rather than "correcting" them to modern Lao.
+    romanization: "Lao romanization (BGN/PCGN-style) + note archaic spellings"
+
+  - id: shan
+    names: [Shan, Tai Long, Tai Yai, လိၵ်ႈတႆး, อักษรไทใหญ่]
+    unicode_block: "Myanmar U+1000 + Shan extensions U+1075–U+108F, U+1090–U+1099"
+    regions: [Shan State (Myanmar), Northern Thailand border]
+    traditions: [Buddhist texts, chronicles, poetry, astrology]
+    prompt_notes: |
+      Shan (Tai Long) script — Burmese-derived, built from rounded/circular
+      forms. Uses the Myanmar block plus dedicated Shan extension letters, tone
+      marks, and Shan digits U+1090–U+1099.
+      - DISTINGUISH FROM BURMESE: Shan has its own consonants and vowels not in
+        Burmese, is generally rounder/simpler, and marks tone with Shan-specific
+        signs. Shan digits differ from Burmese digits — read digits carefully.
+      - Two layers you may meet: older pre-reform Shan (ambiguous vowels, fewer
+        tone marks, context-dependent reading) vs reformed modern Shan (explicit
+        vowels/tones). Note which, and for old Shan supply tone/vowel only when
+        the context warrants — otherwise flag ambiguity.
+      - Circular stacking is light compared with Tham; medials attach to the base.
+    romanization: "Shan romanization with tone marks"
+
+  - id: tai_lue
+    names: [Tai Lue, Old Tai Lue, Tham Lue, Lue, อักษรไทลื้อ]
+    unicode_block: "Tai Tham U+1A20  (NOT New Tai Lue U+1980)"
+    regions: [Sipsong Panna (Yunnan), Northern Thailand, Laos, Shan State]
+    traditions: [Pali liturgical, folk tales, ritual/astrological manuscripts]
+    prompt_notes: |
+      OLD Tai Lue (Tham Lue) — a Tham-family script written in the Tai Tham block,
+      closely related to Lan Na and Tai Khuen, used in Sipsong Panna and the
+      upper Mekong.
+      - CRITICAL: this is NOT New Tai Lue (Xishuangbanna New Dai, Unicode U+1980).
+        New Tai Lue is a 1950s reformed script — ANGULAR, LINEAR, in-line vowels,
+        NO vertical stacking. If you see geometric non-stacking letters written on
+        a single baseline, that is New Tai Lue (a different script) — say so and
+        do NOT transcribe it as old Tai Lue.
+      - Old Lue has the Tham family's rounded forms and subscript stacking.
+      - CONFUSION: near-identical to tai_tham and khuen; separate by provenance
+        and minor letter/vowel variants, not by silhouette.
+    romanization: "Pali IAST for religious text; Tai Lue romanization otherwise"
+
+  - id: burmese_mon
+    names: [Mon, Burmese, Mon-Burmese, Kammavaca, ဘာသာမန်]
+    unicode_block: "Myanmar U+1000 + Mon extensions U+105A–U+1061, U+1065–U+106D"
+    regions: [Lower Myanmar, Mon State, Central Thailand (Mon diaspora)]
+    traditions: [Pali kammavaca, tipitaka, ordination texts]
+    prompt_notes: |
+      Round Mon-Burmese script. Two very different hands share the alphabet:
+      - RUNNING HAND: ordinary rounded Burmese/Mon manuscript writing.
+      - KAMMAVACA STYLE: highly stylised square "tamarind-seed" (magyi-si)
+        lettering, thick and lacquered, used for ordination (kammavācā) texts on
+        gilded leaves. Letters are ornamental, widely spaced, and hard to read as
+        running text — transcribe cell/glyph by glyph and flag ligatures.
+      - MON vs BURMESE: Mon adds consonants, medials, and vowels absent from
+        Burmese (the Mon extension letters). Presence of Mon-only letters/medials
+        indicates Mon; otherwise treat as Burmese. State which you inferred.
+      - Liturgy is in Pali — expect Pali orthography, stacked conjuncts, and the
+        virama/asat. Preserve stacking; do not flatten conjuncts.
+    romanization: "IAST / Pali for liturgy; Mon or Burmese romanization for vernacular"
+
+  - id: khuen
+    names: [Tai Khuen, Khün, Kengtung Tai, Tham Khuen, อักษรไทเขิน]
+    unicode_block: "Tai Tham U+1A20"
+    regions: [Kengtung (eastern Shan State), Northern Thailand]
+    traditions: [Pali liturgical, chronicles, folk & ritual manuscripts]
+    prompt_notes: |
+      Tai Khuen (Kengtung) — a Tham-family script in the Tai Tham block, very
+      close to Lan Na and Tai Lue. Rounded forms with subscript stacking.
+      - CONFUSION: shares almost all letterforms with tai_tham and tai_lue.
+        Differentiate by provenance (Kengtung) and a handful of vowel/letter
+        variants — never by silhouette alone. If you cannot tell which Tham
+        variant, give the shared reading and flag the ambiguity.
+      - Pali orthography for liturgy; Khün vernacular otherwise.
+    romanization: "Pali IAST for religious text; Tai Khuen romanization otherwise"
+
+  - id: ariyaka
+    names: [Ariyaka, Ariyaka script, อริยกะ, Mongkut Pali script]
+    unicode_block: "none — romanize"
+    regions: [Thailand (Dhammayut/Thammayut order)]
+    traditions: [Pali scripture (printed and manuscript)]
+    prompt_notes: |
+      A rare invented script devised by King Mongkut (Rama IV, c. 1840s) to print
+      Pali for the Dhammayut order, freeing Pali from the Khom/Thai scripts.
+      UNENCODED — output romanization (Pali IAST); there is no Unicode block.
+      - LOOK: neat, geometric, quasi-European "typeset" letterforms — alphabetic,
+        one letter per Pali phoneme, with LITTLE OR NO complex stacking (unlike
+        Khom/Tham). If you see tidy printed-looking invented letters carrying
+        Pali, suspect Ariyaka.
+      - Because it is phonemic and Pali-only, transcribe to Pali IAST directly;
+        note it is a reconstruction from an unencoded script.
+      - Genuinely rare — only propose Ariyaka with visible geometric evidence;
+        otherwise prefer Khom for Central Thai Pali.
+    romanization: "Pali IAST"
+
+  - id: grantha_thai
+    names: [Grantha, Grantha-Thai, Indic bija, ครันถะ]
+    unicode_block: "Grantha U+11300 (ornamental variants often unencoded — romanize)"
+    regions: [Central Thailand (sacred/tantric contexts)]
+    traditions: [Sanskrit mantra, bija syllables, tantric yantra]
+    prompt_notes: |
+      Grantha-derived Indic letters imported into Thai sacred/tantric contexts —
+      typically isolated bīja (seed) syllables and Sanskrit mantras rather than
+      running prose.
+      - CONTEXT: single ornamental glyphs — oṃ, hūṃ, hrīḥ, phaṭ, etc. — set in
+        yantra, on amulets, or heading a khatha. Heavily stylised; many are
+        decorative variants with no Unicode — romanize (IAST Sanskrit) and flag.
+      - CONFUSION vs Khom: Grantha shows rounder South-Indian forms and is used
+        for SANSKRIT mantra; Khom (also round) carries longer Pali/Thai text.
+        Isolated Sanskrit seed syllables lean Grantha; running liturgy leans Khom.
+      - Preserve anusvara/visarga/candrabindu on seed syllables — they change the
+        mantra. Do not drop diacritics.
+    romanization: "IAST Sanskrit"
