@@ -4,17 +4,19 @@ Different parts of this repository come from different places and cannot carry o
 licence between them. The layers are deliberate.
 
 RECORDS, PROSE AND PAGES — everything here that is not source code
-  Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
-  https://creativecommons.org/licenses/by-sa/4.0/
+  Creative Commons Attribution 4.0 International (CC BY 4.0)
+  SPDX-License-Identifier: CC-BY-4.0
+  https://creativecommons.org/licenses/by/4.0/
   Attribute to: Manuscript Transcribe (NaN), with a link to this repository.
-  Adapted material carries CC BY-SA 4.0 forward. The licence covers sui generis
-  database rights where they exist (section 4).
+  Attribution is the whole of it: name the work and link back, and the rest is
+  yours — copy it, adapt it, sell it, index it, train on it. The licence covers
+  sui generis database rights where they exist (section 4).
 
 CODE — the source files that build and serve the above
-  GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)
-  https://www.gnu.org/licenses/agpl-3.0.html
-  Section 13 applies: a modified version offered to users over a network must
-  offer those users its source.
+  MIT
+  SPDX-License-Identifier: MIT
+  Copyright (c) 2026 NaN
+  Keep the copyright line and the permission notice; everything else is open.
 
 ANYTHING CARRIED IN FROM SOMEWHERE ELSE keeps the licence it arrived with, named
 beside it — a sidecar .json, a source field on the record, or a line on the page.

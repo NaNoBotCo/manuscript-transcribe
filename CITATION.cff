@@ -9,6 +9,6 @@ authors:
 repository-code: "https://github.com/NaNoBotCo/manuscript-transcribe"
 url: "https://nanobotco.github.io/manuscript-transcribe/"
 license:
-  - CC-BY-SA-4.0
-  - AGPL-3.0-or-later
+  - CC-BY-4.0
+  - MIT
 date-released: "2026-09-18"
