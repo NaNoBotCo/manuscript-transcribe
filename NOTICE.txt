@@ -1,0 +1,30 @@
+Manuscript Transcribe — licences, in layers
+
+Different parts of this repository come from different places and cannot carry one
+licence between them. The layers are deliberate.
+
+RECORDS, PROSE AND PAGES — everything here that is not source code
+  Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+  https://creativecommons.org/licenses/by-sa/4.0/
+  Attribute to: Manuscript Transcribe (NaN), with a link to this repository.
+  Adapted material carries CC BY-SA 4.0 forward. The licence covers sui generis
+  database rights where they exist (section 4).
+
+CODE — the source files that build and serve the above
+  GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)
+  https://www.gnu.org/licenses/agpl-3.0.html
+  Section 13 applies: a modified version offered to users over a network must
+  offer those users its source.
+
+ANYTHING CARRIED IN FROM SOMEWHERE ELSE keeps the licence it arrived with, named
+beside it — a sidecar .json, a source field on the record, or a line on the page.
+Nothing upstream is relicensed by this file. Where an upstream licence and the
+layers above disagree, the upstream licence governs that file.
+
+Copyright (c) 2026 NaN
+
+---
+
+The verbatim text of the licence named above is in LICENSE beside this file.
+The layers on this page are the terms; LICENSE carries the wording a machine
+matches against.
